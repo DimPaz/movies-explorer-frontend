@@ -6,7 +6,6 @@
   margin: 0 70px;
   padding: 85px 0;
 }
-
 .promo__title {
   font-weight: 400;
   font-size: 50px;
@@ -21,23 +20,21 @@
   max-width: 310px;
   margin: 36px 0 156px;
 }
-
 .promo__btn-link {
   box-sizing: border-box;
   border: 1px solid rgba(255, 255, 255, 0.6);
   border-radius: 3px;
-  transition: opacity 0.3s linear;
   color: #fff;
-  text-decoration: none;
-
+  text-decoration: none;  
   font-weight: 500;
   font-size: 12px;
   padding: 10px 20px;
+  transition: filter 0.1s linear, opacity 0.1s linear;
 }
 .promo__btn-link:hover {
-  opacity: 0.6;
+  filter: drop-shadow(0px 4px 2px rgba(95, 95, 95, 0.6));
+  opacity: 0.9;
 }
-
 .promo__img {
   width: 310px;
 }
@@ -64,15 +61,14 @@
     margin: 0 auto 102px;
     text-align: center;
   }
-
   .promo__btn-link {
     margin: 0 auto;
   }
-
   .promo__img {
     width: 310px;
   }
 }
+
 @media screen and (max-width: 700px) {
   .promo {
     margin: 0 10px;

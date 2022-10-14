@@ -1,14 +1,15 @@
 import './Navigation.css';
+import '../Header/Header.css';
 
 import { Link } from 'react-router-dom';
 import iconMain from '../../images/icon-main.svg';
 
 function Navigation() {
   return (
-    <nav className="navigation"> 
+    <nav className="navigation">
       <input
         className="navigation__toggle"
-        id="navigation__toggle"
+        id="navigation__toggle" 
         type="checkbox"
       />
       <label className="navigation__btn" for="navigation__toggle">
@@ -32,18 +33,10 @@ function Navigation() {
             </a>
           </li>
         </ul>
-        <div className="navigation__account">
-          <Link className="navigation__account_link" to="/profile">
-            Аккаунт
-          </Link>
-          <Link to="/profile">
-            <img
-              className="navigation__account_icon-img"
-              src={iconMain}
-              alt="Иконка юзера"
-            />
-          </Link>
-        </div>
+        <Link className="account__link account__link_nav" to="/profile">
+          <p className="account__text">Аккаунт</p>
+          <img className="account__icon" src={iconMain} alt="Иконка юзера" />
+        </Link>
       </div>
       <div className="navigation__blackout"></div>
     </nav>

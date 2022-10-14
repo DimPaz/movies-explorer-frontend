@@ -21,8 +21,6 @@
   grid-template-columns: 1fr 1fr;
   justify-items: center;
   gap: 40px;
-  /* display: flex; */
-  /* justify-content: space-between; */
   list-style-type: none;
   margin: 0 auto;
   padding: 0;

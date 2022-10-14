@@ -14,16 +14,12 @@ function Header({ loggedIn }) {
       {!loggedIn ? (
         <NavTab />
       ) : (
-        <> 
-        <Navigation />
-          <div className="header__akkaunt">
-            <Link className="header__link header__link_account" to="/profil">
-              Аккаунт
-            </Link>
-            <Link to="/profile">
-              <img className="header__icon-img" src={iconMain} alt="Иконка юзера" />
-            </Link>            
-          </div>
+        <>
+          <Navigation />
+          <Link className="account__link" to="/profile">
+            <p className="account__text">Аккаунт</p>
+            <img className="account__icon" src={iconMain} alt="Иконка юзера" />
+          </Link>
         </>
       )}
     </header>

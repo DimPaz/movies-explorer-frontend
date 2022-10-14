@@ -1,36 +1,34 @@
 .login {
-    background: #ffffff;
-    max-width: 396px;
-    margin: 70px auto;
+  background: #ffffff;
+  max-width: 396px;
+  margin: 70px auto;
+}
+.login__logo {
+  width: 38px;
+  height: 38px;
+  transition: filter 0.1s linear, opacity 0.1s linear;
+}
+.login__logo:hover {
+  filter: drop-shadow(0px 4px 2px rgba(95, 95, 95, 0.6));
+  opacity: 0.9;
+}
+.login__title {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  margin: 40px 0;
+}
+
+@media screen and (max-width: 520px) {
+  .login {
+    max-width: 260px;
+    margin: 56px auto;
   }
-  
   .login__logo {
-    width: 38px;
-    height: 38px;
-    transition: opacity 0.3s linear;
+    width: 100%;
+    margin: 0 auto;
   }
-  .login__logo:hover {
-    opacity: 0.6;
-  }
-  
   .login__title {
-    font-weight: 500;
-    font-size: 24px;
-    line-height: 29px;
-    margin: 40px 0;
+    text-align: center;
   }
-  
-  @media screen and (max-width: 520px) {
-    .login {
-      max-width: 260px;
-      margin: 56px auto;
-    }
-    .login__logo {
-      width: 100%;
-      margin: 0 auto;
-    }
-    .login__title {
-      text-align: center;
-    }
-  }
-  
+}

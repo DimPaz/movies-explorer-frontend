@@ -1,6 +1,5 @@
 .header {
-  /* background-color: #fff; */
-  background-color: rgb(255, 0, 0);
+  background-color: #fff;
   max-width: 1280px;
   margin: auto;
   display: flex;
@@ -9,7 +8,7 @@
   align-items: center;
   max-height: 38px;
 }
- 
+
 .header_auth {
   background-color: #465dff;
 }
@@ -17,61 +16,53 @@
 .header__logo {
   width: 38px;
   height: 38px;
-  transition: opacity 0.3s linear;
+  transition: filter 0.1s linear, opacity 0.1s linear;
   margin-top: 5px;
 }
 .header__logo:hover {
-  opacity: 0.6;
+  filter: drop-shadow(0px 4px 2px rgba(95, 95, 95, 0.6));
+  opacity: 0.9;
 }
 
-.header__akkaunt {
+.account__link {
   display: flex;
   align-items: center;
-}
-
-.header__link {
-  transition: opacity 0.3s linear;
-}
-.header__link:hover { 
-  opacity: 0.6;
-}
-
-.header__link_account {
-  margin-right: 17px;
   text-decoration: none;
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
   color: black;
+  transition: filter 0.1s linear, opacity 0.1s linear;
+}
+.account__link:hover {
+  filter: drop-shadow(0px 4px 2px rgba(95, 95, 95, 0.6));
+  opacity: 0.9;
 }
 
-.header__icon-img {
-  background-color: #F9F9F9; 
+.account__text {
+  margin: 0;
+}
+
+.account__icon {
+  background-color: #f9f9f9;
   width: 11.5px;
   height: 14px;
   border-radius: 4px;
   padding: 7.25px 8px;
-  margin-top: 5px;
-  transition: opacity 0.3s linear;
-}
-
-.header__icon-img:hover {
-  opacity: 0.6;
+  margin: 0 0 0 17px;
 }
 
 @media screen and (max-width: 768px) {
   .header {
     padding: 18px 30px;
   }
-  .header__akkaunt {
-      display: none;
+  .account__link {
+    display: none;
   }
-
 }
 
 @media screen and (max-width: 520px) {
   .header {
     padding: 18px 14px;
   }
-  
 }

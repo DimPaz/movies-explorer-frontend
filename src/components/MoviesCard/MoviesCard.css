@@ -5,6 +5,11 @@
   width: 270px;
   height: 151px;
   object-fit: cover;
+  transition: filter 0.1s linear, opacity 0.1s linear;
+}
+.element__image:hover {
+  filter: drop-shadow(0px 4px 2px rgba(95, 95, 95, 0.6));
+  opacity: 0.9;
 }
 .element__data {
   display: flex;
@@ -36,10 +41,11 @@
   margin-left: 20px;
   flex-shrink: 0;
   padding: 0;
-  transition: opacity 0.3s linear;
+  transition: filter 0.1s linear, opacity 0.1s linear;
 }
 .element__btn:hover {
-  opacity: 0.6;
+  filter: drop-shadow(0px 4px 2px rgba(95, 95, 95, 0.6));
+  opacity: 0.9;
 }
 
 .element__time {

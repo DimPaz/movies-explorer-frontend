@@ -9,18 +9,12 @@ function Portfolio() {
         <li className="portfolio__techs_list">
           <a
             className="portfolio__techs_link"
-            href="https://github.com/DimPaz/how-to-learn"
+            href="https://github.com/DimPaz/how-to-learn" 
             target="blank"
           >
             Статичный сайт
           </a>
-          <a
-            className="portfolio__techs_link"
-            href="https://github.com/DimPaz/how-to-learn"
-            target="blank"
-          >
-            <img className="portfolio__img-link" src={arrow} alt="стрелка" />
-          </a>
+          <img className="portfolio__img-link" src={arrow} alt="стрелка" />
         </li>
         <li className="portfolio__techs_list">
           <a
@@ -30,13 +24,7 @@ function Portfolio() {
           >
             Адаптивный сайт
           </a>
-          <a
-            className="portfolio__techs_link"
-            href="https://github.com/DimPaz/russian-travel"
-            target="blank"
-          >
-            <img className="portfolio__img-link" src={arrow} alt="стрелка" />
-          </a>
+          <img className="portfolio__img-link" src={arrow} alt="стрелка" />
         </li>
         <li className="portfolio__techs_list">
           <a
@@ -46,13 +34,8 @@ function Portfolio() {
           >
             Одностраничное приложение
           </a>
-          <a
-            className="portfolio__techs_link"
-            href="http://dpazuxin.nomorepartiesxyz.ru"
-            target="blank"
-          >
-            <img className="portfolio__img-link" src={arrow} alt="стрелка" />
-          </a>
+
+          <img className="portfolio__img-link" src={arrow} alt="стрелка" />
         </li>
       </ul>
     </section>
