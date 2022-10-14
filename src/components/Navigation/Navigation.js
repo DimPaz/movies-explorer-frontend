@@ -12,7 +12,7 @@ function Navigation() {
         id="navigation__toggle" 
         type="checkbox"
       />
-      <label className="navigation__btn" for="navigation__toggle">
+      <label className="navigation__btn" htmlFor="navigation__toggle">
         <span className="navigation__btn-img"></span>
       </label>
       <div className="navigation__container">

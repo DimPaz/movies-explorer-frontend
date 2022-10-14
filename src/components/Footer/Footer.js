@@ -1,5 +1,5 @@
 import '../Footer/Footer.css';
- 
+
 function Futer() {
   return (
     <footer className="footer">
@@ -12,7 +12,7 @@ function Futer() {
           <ul className="footer__items">
             <li className="footer__item">
               <a
-                class="footer__link"
+                className="footer__link"
                 href="https://practicum.yandex.ru"
                 target="blank"
               >
@@ -20,7 +20,11 @@ function Futer() {
               </a>
             </li>
             <li className="footer__item">
-              <a class="footer__link" href="https://github.com" target="blank">
+              <a
+                className="footer__link"
+                href="https://github.com"
+                target="blank"
+              >
                 Github
               </a>
             </li>
