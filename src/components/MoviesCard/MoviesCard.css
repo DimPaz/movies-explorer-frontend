@@ -1,0 +1,73 @@
+.element {
+  width: 270px;
+}
+.element__image {
+  width: 270px;
+  height: 151px;
+  object-fit: cover;
+}
+.element__data {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #e8e8e8;
+  border-style: none none solid none;
+  padding: 0 0 13px 0;
+  margin: 10px 0 7px 0;
+}
+.element__title {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  width: 100%;
+  margin: 4px 0 0 0;
+  height: 32px;
+  overflow: hidden;
+  word-break: keep-all;
+  text-overflow: ellipsis;
+}
+.element__btn {
+  background-image: url(../../images/btn-not-save.svg);
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  margin-left: 20px;
+  flex-shrink: 0;
+  padding: 0;
+  transition: opacity 0.3s linear;
+}
+.element__btn:hover {
+  opacity: 0.6;
+}
+
+.element__time {
+  font-size: 11px;
+  color: #a0a0a0;
+  margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .element {
+    width: 339px;
+  }
+  .element__image {
+    width: 339px;
+    height: 190px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .element {
+    width: 300px;
+  }
+  .element__image {
+    width: 300px;
+    height: 168px;
+  }
+  .element__title {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

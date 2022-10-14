@@ -1,4 +1,77 @@
-.App {
-    padding: 20px;
-    width: 100%;
+.header {
+  /* background-color: #fff; */
+  background-color: rgb(255, 0, 0);
+  max-width: 1280px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  padding: 18px 70px;
+  align-items: center;
+  max-height: 38px;
+}
+ 
+.header_auth {
+  background-color: #465dff;
+}
+
+.header__logo {
+  width: 38px;
+  height: 38px;
+  transition: opacity 0.3s linear;
+  margin-top: 5px;
+}
+.header__logo:hover {
+  opacity: 0.6;
+}
+
+.header__akkaunt {
+  display: flex;
+  align-items: center;
+}
+
+.header__link {
+  transition: opacity 0.3s linear;
+}
+.header__link:hover { 
+  opacity: 0.6;
+}
+
+.header__link_account {
+  margin-right: 17px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: black;
+}
+
+.header__icon-img {
+  background-color: #F9F9F9; 
+  width: 11.5px;
+  height: 14px;
+  border-radius: 4px;
+  padding: 7.25px 8px;
+  margin-top: 5px;
+  transition: opacity 0.3s linear;
+}
+
+.header__icon-img:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 18px 30px;
   }
+  .header__akkaunt {
+      display: none;
+  }
+
+}
+
+@media screen and (max-width: 520px) {
+  .header {
+    padding: 18px 14px;
+  }
+  
+}
