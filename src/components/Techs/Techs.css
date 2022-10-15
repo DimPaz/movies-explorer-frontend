@@ -96,3 +96,8 @@
     margin: 24px 0 50px;
   }
 }
+@media screen and (max-width: 520px) {
+  .techs {
+    background-color: #fff;
+  }
+}

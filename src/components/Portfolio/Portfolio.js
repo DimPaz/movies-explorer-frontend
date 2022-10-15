@@ -9,12 +9,12 @@ function Portfolio() {
         <li className="portfolio__techs_list">
           <a
             className="portfolio__techs_link"
-            href="https://github.com/DimPaz/how-to-learn" 
+            href="https://github.com/DimPaz/how-to-learn"
             target="blank"
           >
             Статичный сайт
+            <img className="portfolio__img-link" src={arrow} alt="стрелка" />
           </a>
-          <img className="portfolio__img-link" src={arrow} alt="стрелка" />
         </li>
         <li className="portfolio__techs_list">
           <a
@@ -23,19 +23,18 @@ function Portfolio() {
             target="blank"
           >
             Адаптивный сайт
+            <img className="portfolio__img-link" src={arrow} alt="стрелка" />
           </a>
-          <img className="portfolio__img-link" src={arrow} alt="стрелка" />
         </li>
         <li className="portfolio__techs_list">
           <a
             className="portfolio__techs_link"
-            href="http://dpazuxin.nomorepartiesxyz.ru"
+            href="https://github.com/DimPaz/react-mesto-api-full"
             target="blank"
           >
             Одностраничное приложение
+            <img className="portfolio__img-link" src={arrow} alt="стрелка" />
           </a>
-
-          <img className="portfolio__img-link" src={arrow} alt="стрелка" />
         </li>
       </ul>
     </section>

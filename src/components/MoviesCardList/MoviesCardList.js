@@ -6,7 +6,7 @@ import Preloader from '../Preloader/Preloader.js';
 function MoviesCardList({ movies, addMuviesBtn }) {
   const [loading, setLoading] = useState(false);
 
-  const onPreloader = () => {
+  const onPreloader = () => { 
     setLoading(true);
     setTimeout(offPreloader, 1000);
   };
@@ -23,6 +23,7 @@ function MoviesCardList({ movies, addMuviesBtn }) {
             image={item.image}
             title={item.title}
             duration={item.duration}
+            id={item.id}
           />
         ))}
       </div>

@@ -9,7 +9,7 @@ const savedMovies = [
     id: 789,
     title: 'Фильм',
     duration: '2ч2м',
-    image: 'https://i.gifer.com/4yd.gif',
+    image: 'https://i.gifer.com/4yd.gif', 
   },
   {
     id: 456,
@@ -26,3 +26,5 @@ const savedMovies = [
 ];
 
 export default savedMovies;
+
+

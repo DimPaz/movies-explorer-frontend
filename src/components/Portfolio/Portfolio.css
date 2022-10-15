@@ -19,9 +19,6 @@
   border-style: solid none none none;
   margin: 20px 0 0 0;
   padding: 19px 0 0 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 .portfolio__techs_list:first-child {
   border-style: none;
@@ -29,6 +26,9 @@
   padding: 0;
 }
 .portfolio__techs_link {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
   font-size: 30px;
   line-height: 50px;
   letter-spacing: -0.04em;
@@ -42,11 +42,9 @@
 }
 
 .portfolio__img-link {
-  width: 20px;
+  width: 21px;
   height: 100%;
 }
-
-
 
 @media screen and (max-width: 768px) {
   .portfolio {

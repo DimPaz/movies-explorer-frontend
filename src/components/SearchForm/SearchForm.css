@@ -1,5 +1,6 @@
 .search-form {
   margin: 70px 70px 0 70px;
+  transition: filter 0.1s linear, opacity 0.1s linear;
 }
 .search-form__form {
   height: 72px;
@@ -9,6 +10,10 @@
   box-sizing: border-box;
   border: 1.5px solid rgb(170, 170, 170, 0.2);
   border-radius: 8px;
+  transition: border 0.2s linear;
+}
+.search-form__form:hover {
+  border: 1.5px solid rgba(0, 0, 0, 0.3);
 }
 .search-form__form_input {
   width: 100%;

@@ -1,5 +1,5 @@
 import '../Register/Register.css';
-import logo from '../../images/logo.svg';
+import logo from '../../images/logo.svg'; 
 
 function Register() {
   return (

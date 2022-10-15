@@ -20,5 +20,5 @@ function SearchForm() {
       </div>
     </section>
   );
-} 
+}
 export default SearchForm;
