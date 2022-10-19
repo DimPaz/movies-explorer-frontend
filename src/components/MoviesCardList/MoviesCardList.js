@@ -1,46 +1,48 @@
 import './MoviesCardList.css';
 import React, { useState } from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard.js';
-import Preloader from '../Preloader/Preloader.js';
 
-function MoviesCardList({ movies, addMuviesBtn }) {
-  const [loading, setLoading] = useState(false);
+import { useLocation } from 'react-router-dom';
 
-  const onPreloader = () => { 
-    setLoading(true);
-    setTimeout(offPreloader, 1000);
-  };
-  function offPreloader() {
-    setLoading(false);
-  }
+function MoviesCardList({
+  movies,
+  addMuviesBtn,
+  // addMovies,
+  saveMovies,
+  saveMoviesCheck,
+}) {
+  const { pathname } = useLocation();
 
+  // console.log('в мувикардлист', movies);
   return (
     <section className="cardlist">
-      <div className="cardlist__films">
-        {movies.map((item) => (
-          <MoviesCard
-            key={item.id}
-            image={item.image}
-            title={item.title}
-            duration={item.duration}
-            id={item.id}
-          />
-        ))}
-      </div>
-
-      {loading ? (
-        <Preloader />
+      {movies.length > 0 ? (
+        <div className="cardlist__films">
+          {movies.map((item) => (
+            <MoviesCard
+              key={item.id || item.movieId}
+              item={item}
+              saveMovies={saveMovies}
+              saveMoviesCheck={saveMoviesCheck}
+            />
+          ))}
+        </div>
       ) : (
-        addMuviesBtn && (
-          <button
-            className="cardlist__add-muvies-btn"
-            onClick={onPreloader}
-            type="button"
-            name="add"
-          >
-            Ещё
-          </button>
-        )
+        <div className="cardlist__hint-text">нет фильмов</div>
+      )}
+
+      {/* {addMovies.length > 0 && pathname === '/movies' ? ( */}
+      {movies.length > 0 && pathname === '/movies' ? (
+        <button
+          className="cardlist__add-muvies-btn"
+          onClick={addMuviesBtn}
+          type="button"
+          name="add"
+        >
+          Ещё
+        </button>
+      ) : (
+        ''
       )}
     </section>
   );

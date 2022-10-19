@@ -3,9 +3,9 @@ const url = 'https://api.dpazuxin.nomoredomains.icu';
 class MainApi {
   constructor(url) {
     this._url = url;
-    this._headers = {
-      'Content-type': 'application/json',
-    };
+    // this._headers = {
+    //   'Content-type': 'application/json',
+    // };
   }
 
   _checkResponse(res) {
@@ -13,14 +13,6 @@ class MainApi {
       return res.json();
     }
     return Promise.reject('Возникла ошибка');
-  }
-
-  _addHeader() {
-    const token = localStorage.getItem('token');
-    return {
-      'Content-type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    };
   }
 
   // запрос на регистрацию
@@ -66,9 +58,13 @@ class MainApi {
 
   //запрос патч для редактирования name и email
   addUserInfo(name, email) {
+    const token = localStorage.getItem('token');
     return fetch(`${this._url}/users/me/`, {
       method: 'PATCH',
-      headers:  this._addHeader(),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify({
         name,
         email,
@@ -76,7 +72,42 @@ class MainApi {
     }).then(this._checkResponse);
   }
 
-
+  // запрос фильмов
+  getMovies() {
+    const token = localStorage.getItem('token');
+    return fetch(`${this._url}/movies`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(this._checkResponse);
+  }
+  // запрос на добавление фильмов
+  addMovies(movie) {
+    // console.log(movie);
+    const token = localStorage.getItem('token');
+    return fetch(`${this._url}/movies`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(movie),
+    }).then(this._checkResponse);
+  }
+  // запрос на удаление фильмов
+  delMovie(id) {
+    // console.log(id);
+    const token = localStorage.getItem('token');
+    return fetch(`${this._url}/movies/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(this._checkResponse);
+  }
 }
 
 const mainApi = new MainApi(url);
