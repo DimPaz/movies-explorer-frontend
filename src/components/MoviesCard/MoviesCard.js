@@ -7,31 +7,24 @@ function MoviesCard({ item, saveMovies, saveMoviesCheck }) {
   const [saved, setSaved] = useState(false);
 
   function handleDelBtn() {
-    // console.log('handleDelBtn');
     saveMoviesCheck(item, false);
   }
+
   function handleSaveNotSaveBtn() {
-    // console.log('handleSaveNotSaveBtn');
     const newFilm = !saved;
-    // console.log('newFilm', newFilm);
-    // console.log('saveMovies', saveMovies);
+    // const saveNewFilm = saveMovies.find((data) => data.movieId == item.id);
     const saveNewFilm = saveMovies.filter((data) => {
-      // console.log('data.movieId', data.movieId, 'item.id', item.id);
-      return data.movieId === item.id;
+      return data.movieId == item.id;
     });
+    // console.log('saveNewFilm чему равно', saveNewFilm);
     saveMoviesCheck(
-      { ...item, _id: saveNewFilm.length > 0 ? saveNewFilm._id : null },
+      { ...item, _id: saveNewFilm.length > 0 ? saveNewFilm[0]._id : null },
       newFilm
     );
   }
 
   useEffect(() => {
     if (pathname === '/movies') {
-      // console.log('saveMovies', saveMovies);
-      // const valueSaveNotSave = saveMovies.find((data) => {
-      //   console.log('data.movieId', data.movieId, 'item.id', item.id);
-      //   return data.movieId === item.id;
-      // });
       const valueSaveNotSave = saveMovies.find(
         (data) => data.movieId == item.id
       );

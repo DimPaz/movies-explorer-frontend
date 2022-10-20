@@ -45,9 +45,9 @@ function Movies() {
 
   async function saveMoviesCheck(movie, likeFilm) {
     if (likeFilm) {
-      console.log('в компаненте movies', likeFilm)
+      // console.log('в компаненте movies', likeFilm)
       const newFilm = {
-        country: movie.country || 'Неизвестно',
+        country: movie.country || 'нужно загуглить',
         description: movie.description,
         director: movie.director,
         duration: movie.duration,
@@ -60,6 +60,7 @@ function Movies() {
         year: movie.year,
       };
       try {
+        // console.log(movie.trailerLink)
         await mainApi.addMovies(newFilm);
         const addFilm = await mainApi.getMovies();
         setSaveMovies(addFilm);
@@ -68,6 +69,7 @@ function Movies() {
       }
     } else {
       try {
+        // console.log('в компаненте movies delMovie', movie)
         await mainApi.delMovie(movie._id);
         const delFilm = await mainApi.getMovies();
         setSaveMovies(delFilm);

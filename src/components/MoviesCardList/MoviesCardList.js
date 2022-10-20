@@ -13,7 +13,7 @@ function MoviesCardList({
 }) {
   const { pathname } = useLocation();
 
-  // console.log('в мувикардлист', movies);
+  // console.log('в мувикардлист', saveMovies);
   return (
     <section className="cardlist">
       {movies.length > 0 ? (
