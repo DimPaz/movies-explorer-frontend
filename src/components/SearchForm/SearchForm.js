@@ -26,10 +26,11 @@ function SearchForm({
 
   function handleChange(e) {
     setValueSearch(e.target.value);
+    // console.log(valueSearch)
   }
-  function handleCheckbox(e) {
+  function handleCheckbox() {
     setCheckbox(!checkbox);
-    onCheckbox(checkbox);
+    onCheckbox(!checkbox);
   }
 
   return (
