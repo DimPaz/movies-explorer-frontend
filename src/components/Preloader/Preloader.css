@@ -40,14 +40,14 @@
 }
 
 .preloader {
-  /* min-height: calc(100vh - 558px); */
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  max-width: 100%;
   height: 100%;
   z-index: 10;
   padding: 33px;
+  margin-bottom: calc(100vh - 629px);
 }
 
 .preloader__container {

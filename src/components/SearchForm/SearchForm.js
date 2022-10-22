@@ -21,12 +21,11 @@ function SearchForm({
 
   function handleSubmit(e) {
     e.preventDefault();
-    onGetMovie(valueSearch, checkbox);
+    onGetMovie(valueSearch);
   }
 
   function handleChange(e) {
     setValueSearch(e.target.value);
-    // console.log(valueSearch)
   }
   function handleCheckbox() {
     setCheckbox(!checkbox);

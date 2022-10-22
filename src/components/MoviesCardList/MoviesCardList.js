@@ -1,5 +1,5 @@
 import './MoviesCardList.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard.js';
 
 import { useLocation } from 'react-router-dom';
@@ -13,7 +13,6 @@ function MoviesCardList({
 }) {
   const { pathname } = useLocation();
 
-  // console.log('в мувикардлист', saveMovies);
   return (
     <section className="cardlist">
       {movies.length > 0 ? (

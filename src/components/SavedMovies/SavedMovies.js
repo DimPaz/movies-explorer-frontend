@@ -8,63 +8,62 @@ import { useState, useEffect } from 'react';
 import mainApi from '../../utils/MainApi.js';
 
 function SavedMovies() {
-  const [preloader, setPrelouder] = useState(false);
-  const [hintText, setHintText] = useState('');
-
-  const [movies, setMovies] = useState([]);
-  const [moviesCheck, setMoviesCheck] = useState([]);
+  const [saveMovies, setSaveMovies] = useState([]);
   const [showMovie, setShowMovie] = useState([]);
-  const [showMovieCheck, setShowMovieCheck] = useState([]);
-
   const [statusInputSearch, setStatusInputSearch] = useState('');
   const [statusCheckbox, setStatusCheckbox] = useState(false);
 
-  // function handleCheckbox(check) {
-  //   let foundSaveMovies = [];
-  //   let foundSaveMoviesShowed = [];
-  //   if (check) {
-  //     foundSaveMovies = moviesCheck;
-  //     foundSaveMoviesShowed = showMovieCheck;
-  //   } else {
-  //     setMoviesCheck(movies);
-  //     setShowMovieCheck(showMovie);
-  //     foundSaveMovies = movies.filter(({ duration }) => duration < 41);
-  //     foundSaveMoviesShowed = showMovie.filter(({ duration }) => duration < 41);
-  //   }
-  //   setMovies(foundSaveMovies);
-  //   setShowMovie(foundSaveMoviesShowed);
-  // }
+  const [preloader, setPrelouder] = useState(true);
+  const [hintText, setHintText] = useState('');
 
-  async function handleGetMovie(valueSearch, check) {
-        console.log('valueSearch, check в сохраненом', valueSearch, check);
+  useEffect(() => {
+    // запрос фильмов которые мы сохранили
+    mainApi
+      .getMovies()
+      .then((data) => {
+        setSaveMovies(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
-  //   localStorage.setItem('searchSavedMovies', valueSearch);
-  //   localStorage.setItem('checkSavedMovies', check);
-  //   try {
-  //     const item = movies;
-  //     console.log(item);
-  //     let foundСards = item.filter(
-  //       ({ nameRU, nameEN, year }) =>
-  //         nameRU.toLowerCase().includes(valueSearch.toLowerCase()) ||
-  //         nameEN.toLowerCase().includes(valueSearch.toLowerCase()) ||
-  //         year.includes(valueSearch)
-  //     );
-  //     if (check)
-  //       foundСards = foundСards.filter(({ duration }) => duration < 41);
-  //     setShowMovie(foundСards);
-  //   } catch (err) {
-  //     setHintText('Нет фильмов');
-  //     setMovies([]);
-  //   }
-  }
+    //отображаем карточки
+    const localStorageCards = localStorage.getItem('cardsSavedMovies');
+    if (localStorageCards) {
+      const foundСards = JSON.parse(localStorageCards);
+      setShowMovie(foundСards);
+    }
+    //возвращаем значение инпута
+    const localStorageSearchSavedMovies =
+      localStorage.getItem('searchSavedMovies');
+    if (localStorageSearchSavedMovies) {
+      setStatusInputSearch(localStorageSearchSavedMovies);
+    }
 
+    //возвращаем положение чекбокса
+    const localStorageCheckSavedMovies =
+      localStorage.getItem('checkSavedMovies');
+    if (localStorageCheckSavedMovies) {
+      setStatusCheckbox(localStorageCheckSavedMovies === 'true');
+    }
+
+    //возвращаем подсказку
+    const localStorageHintSaveMovies = localStorage.getItem(
+      'localHintTextSaveMovies'
+    );
+    if (localStorageHintSaveMovies) {
+      setHintText(localStorageHintSaveMovies);
+    }
+    setPrelouder(false);
+  }, []);
+
+  //удаление карточек
   async function saveMoviesCheck(movie, likeFilm) {
     if (!likeFilm) {
       try {
         await mainApi.delMovie(movie._id);
         const delFilm = await mainApi.getMovies();
-        // setMovies(delFilm);
-        setShowMovie(delFilm);
+        setSaveMovies(delFilm);
       } catch (err) {
         console.log(err);
       }
@@ -72,45 +71,62 @@ function SavedMovies() {
   }
 
   useEffect(() => {
-    mainApi
-      .getMovies()
-      .then((data) => {
-        // setMovies(data);
-        setShowMovie(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (statusCheckbox) {
+      const shortСards = saveMovies.filter(({ duration }) => duration < 41);
+      const shortFoundСards = shortСards.filter(
+        ({ nameRU, nameEN, year }) =>
+          nameRU.toLowerCase().includes(statusInputSearch.toLowerCase()) ||
+          nameEN.toLowerCase().includes(statusInputSearch.toLowerCase()) ||
+          year.includes(statusInputSearch)
+      );
+      localStorage.setItem('cardsSavedMovies', JSON.stringify(shortFoundСards));
+      setShowMovie(shortFoundСards);
+    } else {
+      const foundСards = saveMovies.filter(
+        ({ nameRU, nameEN, year }) =>
+          nameRU.toLowerCase().includes(statusInputSearch.toLowerCase()) ||
+          nameEN.toLowerCase().includes(statusInputSearch.toLowerCase()) ||
+          year.includes(statusInputSearch)
+      );
+      localStorage.setItem('cardsSavedMovies', JSON.stringify(foundСards));
+      setShowMovie(foundСards);
+    }
+  }, [saveMovies, statusCheckbox, statusInputSearch]);
 
-    // //отображаем инпут
-    // const localStorageSearchSavedMovies =
-    //   localStorage.getItem('searchSavedMovies');
-    // console.log(localStorageSearchSavedMovies);
-    // if (localStorageSearchSavedMovies) {
-    //   setStatusInputSearch(localStorageSearchSavedMovies);
-    // }
+  //SearchInput
+  function handleGetMovie(valueSearch) {
+    if (!valueSearch) {
+      setHintText('Введите ключевое слово');
+      localStorage.setItem('localHintTextSaveMovies', 'Введите ключевое слово');
+      localStorage.setItem('cardsSavedMovies', []);
+      localStorage.setItem('searchSavedMovies', '');
+    } else {
+      setHintText('');
+      localStorage.setItem('localHintTextSaveMovies', '');
+      setStatusInputSearch(valueSearch);
+      localStorage.setItem('searchSavedMovies', valueSearch);
+    }
+  }
 
-    // //отображаем чекбокс
-    // const localStorageCheckSavedMovies =
-    //   localStorage.getItem('checkSavedMovies');
-    // console.log(localStorageCheckSavedMovies);
-    // if (localStorageCheckSavedMovies) {
-    //   setStatusCheckbox(localStorageCheckSavedMovies === 'false');
-    // }
-  }, []);
+  //Checkbox
+  function handleCheckbox(check) {
+    localStorage.setItem('checkSavedMovies', check);
+    setStatusCheckbox(check);
+  }
 
-  // console.log('showMovie', showMovie);
   return (
     <section className="saved-movies">
       <SearchForm
         onGetMovie={handleGetMovie}
-        // statusInputSearch={statusInputSearch}
-        // onCheckbox={handleCheckbox}
-        // statusCheckbox={statusCheckbox}
+        statusInputSearch={statusInputSearch}
+        onCheckbox={handleCheckbox}
+        statusCheckbox={statusCheckbox}
       />
       {preloader && <Preloader />}
       {hintText && <div className="movies__hint-text">{hintText}</div>}
-      <MoviesCardList movies={showMovie} saveMoviesCheck={saveMoviesCheck} />
+      {!preloader && !hintText && showMovie !== null && saveMovies !== null && (
+        <MoviesCardList movies={showMovie} saveMoviesCheck={saveMoviesCheck} />
+      )}
     </section>
   );
 }
