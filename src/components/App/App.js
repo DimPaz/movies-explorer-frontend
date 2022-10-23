@@ -30,6 +30,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [infoText, setInfoText] = useState(null);
+  const [infoTextErrorReg, setInfoTextErrorReg] = useState(false);
 
   useEffect(() => {
     tokenCheck();
@@ -45,7 +46,16 @@ function App() {
           handleLogin({ email: user.email, password });
         }
       })
-      .catch('провал регистрации');
+      .catch(
+        setTimeout(() => {
+          setInfoTextErrorReg(true);
+        }, 700)
+      )
+      .finally(
+        setTimeout(() => {
+          setInfoTextErrorReg(false);
+        }, 2500)
+      );
   }
 
   // авторизация
@@ -59,12 +69,19 @@ function App() {
           tokenCheck();
           setLoggedIn(true);
           history.push('/movies');
-          console.log('авторизация');
+          console.log('успешная авторизация');
         } else {
-          console.log('обработать ошибку');
+          setTimeout(() => {
+            setInfoTextErrorReg(true);
+          }, 700);
         }
       })
-      .catch((err) => console.log('Ошибка авторизации', err));
+      .catch((err) => console.log('Ошибка авторизации', err))
+      .finally(
+        setTimeout(() => {
+          setInfoTextErrorReg(false);
+        }, 2500)
+      );
   }
 
   // проверка токена
@@ -77,7 +94,6 @@ function App() {
           if (res) {
             setLoggedIn(true);
             setCurrentUser(res);
-            // console.log('проверка токена');
           } else {
             setLoggedIn(false);
           }
@@ -91,17 +107,22 @@ function App() {
   }
   //редактирование name и email
   function handleUpdateUser({ name, email }) {
-    // console.log('в App => ', name, email)
     mainApi
       .addUserInfo(name, email)
       .then((data) => {
         setCurrentUser(data);
-        setInfoText('Успешно')
+        setInfoText('Данные сохранены успешно');
+        setTimeout(() => {
+          setInfoText('');
+        }, 2000);
       })
       .catch((err) => {
-        setInfoText('Не успешно')
+        setInfoText('Данные не сохранены');
+        setTimeout(() => {
+          setInfoText('');
+        }, 2000);
         console.log(err);
-      })
+      });
   }
 
   // выход из системы
@@ -131,7 +152,7 @@ function App() {
             {loggedIn ? (
               <Redirect to="/movies" />
             ) : (
-              <Register onReg={handleReg} />
+              <Register onReg={handleReg} infoTextErrorReg={infoTextErrorReg} />
             )}
           </Route>
 
@@ -139,7 +160,10 @@ function App() {
             {loggedIn ? (
               <Redirect to="/movies" />
             ) : (
-              <Login onLogin={handleLogin} />
+              <Login
+                onLogin={handleLogin}
+                infoTextErrorReg={infoTextErrorReg}
+              />
             )}
           </Route>
           <ProtectedRoute

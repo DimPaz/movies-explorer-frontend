@@ -11,6 +11,10 @@ function Profile({ onSignOut, onUpdateUser, infoText }) {
   const [inactiveBtm, setInactiveBtm] = useState(false);
 
   useEffect(() => {
+    console.log(infoText)
+  }, [infoText]);
+
+  useEffect(() => {
     setName(currentUser.name);
     setEmail(currentUser.email);
     setInactiveBtm(false);
@@ -19,7 +23,6 @@ function Profile({ onSignOut, onUpdateUser, infoText }) {
   function handleChangeName(e) {
     const inputName = e.target.value;
     setNameNew(inputName);
-    // console.log(nameNew);
 
     if (inputName !== name) {
       setInactiveBtm(true);
@@ -31,7 +34,6 @@ function Profile({ onSignOut, onUpdateUser, infoText }) {
   function handleChangeEmail(e) {
     const inputEmail = e.target.value;
     setEmailNew(inputEmail);
-    // console.log(emailNew);
 
     if (inputEmail !== email) {
       setInactiveBtm(true);
