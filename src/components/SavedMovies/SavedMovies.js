@@ -2,18 +2,18 @@ import './SavedMovies.css';
 import '../Movies/Movies.css';
 import SearchForm from '../SearchForm/SearchForm.js';
 import MoviesCardList from '../MoviesCardList/MoviesCardList.js';
-import Preloader from '../Preloader/Preloader.js';
 
 import { useState, useEffect } from 'react';
 import mainApi from '../../utils/MainApi.js';
+import Preloader from '../Preloader/Preloader.js';
 
 function SavedMovies() {
-  const [saveMovies, setSaveMovies] = useState([]);
   const [showMovie, setShowMovie] = useState([]);
+  const [saveMovies, setSaveMovies] = useState([]);
   const [statusInputSearch, setStatusInputSearch] = useState('');
   const [statusCheckbox, setStatusCheckbox] = useState(false);
 
-  const [preloader, setPrelouder] = useState(true);
+  const [preloader, setPreloader] = useState(true);
   const [hintText, setHintText] = useState('');
 
   useEffect(() => {
@@ -25,14 +25,11 @@ function SavedMovies() {
       })
       .catch((err) => {
         console.log(err);
+        setHintText(
+          'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз'
+        );
       });
 
-    //отображаем карточки
-    const localStorageCards = localStorage.getItem('cardsSavedMovies');
-    if (localStorageCards) {
-      const foundСards = JSON.parse(localStorageCards);
-      setShowMovie(foundСards);
-    }
     //возвращаем значение инпута
     const localStorageSearchSavedMovies =
       localStorage.getItem('searchSavedMovies');
@@ -54,7 +51,9 @@ function SavedMovies() {
     if (localStorageHintSaveMovies) {
       setHintText(localStorageHintSaveMovies);
     }
-    setPrelouder(false);
+    setTimeout(() => {
+      setPreloader(false);
+    }, 300);
   }, []);
 
   //удаление карточек
@@ -79,7 +78,6 @@ function SavedMovies() {
           nameEN.toLowerCase().includes(statusInputSearch.toLowerCase()) ||
           year.includes(statusInputSearch)
       );
-      localStorage.setItem('cardsSavedMovies', JSON.stringify(shortFoundСards));
       setShowMovie(shortFoundСards);
     } else {
       const foundСards = saveMovies.filter(
@@ -88,7 +86,6 @@ function SavedMovies() {
           nameEN.toLowerCase().includes(statusInputSearch.toLowerCase()) ||
           year.includes(statusInputSearch)
       );
-      localStorage.setItem('cardsSavedMovies', JSON.stringify(foundСards));
       setShowMovie(foundСards);
     }
   }, [saveMovies, statusCheckbox, statusInputSearch]);
@@ -96,9 +93,12 @@ function SavedMovies() {
   //SearchInput
   function handleGetMovie(valueSearch) {
     if (!valueSearch) {
-      setHintText('Введите ключевое слово');
-      localStorage.setItem('localHintTextSaveMovies', 'Введите ключевое слово');
-      localStorage.setItem('cardsSavedMovies', []);
+      setHintText('Нужно ввести ключевое слово');
+      localStorage.setItem(
+        'localHintTextSaveMovies',
+        'Нужно ввести ключевое слово'
+      );
+      setShowMovie([]);
       localStorage.setItem('searchSavedMovies', '');
     } else {
       setHintText('');
@@ -122,7 +122,7 @@ function SavedMovies() {
         onCheckbox={handleCheckbox}
         statusCheckbox={statusCheckbox}
       />
-      {preloader && <Preloader />}
+      {!hintText && preloader && <Preloader />}
       {hintText && <div className="movies__hint-text">{hintText}</div>}
       {!preloader && !hintText && showMovie !== null && saveMovies !== null && (
         <MoviesCardList movies={showMovie} saveMoviesCheck={saveMoviesCheck} />

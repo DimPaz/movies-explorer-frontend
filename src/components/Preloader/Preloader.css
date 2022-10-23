@@ -47,7 +47,7 @@
   height: 100%;
   z-index: 10;
   padding: 33px;
-  margin-bottom: calc(100vh - 629px);
+  margin-bottom: calc(100vh - 655px);
 }
 
 .preloader__container {

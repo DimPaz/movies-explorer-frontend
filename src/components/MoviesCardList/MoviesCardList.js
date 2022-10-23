@@ -27,7 +27,7 @@ function MoviesCardList({
           ))}
         </div>
       ) : (
-        <div className="cardlist__hint-text">нет фильмов</div>
+        <div className="cardlist__hint-text">Ничего не найдено</div>
       )}
 
       {/* {addMovies.length > 0 && pathname === '/movies' ? ( */}

@@ -5,5 +5,17 @@
   line-height: 29px;
   text-align: center;
   color: #2be080;
-  margin: 50px auto 50px;
+  margin: 50px 70px;
+}
+@media screen and (max-width: 768px) {
+  .movies__hint-text {
+    font-size: 20px;
+    line-height: 22px;
+  }
+}
+@media screen and (max-width: 520px) {
+  .movies__hint-text {
+    font-size: 12px;
+    line-height: 15px;
+  }
 }
