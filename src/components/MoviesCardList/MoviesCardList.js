@@ -1,15 +1,14 @@
 import './MoviesCardList.css';
-import React, { useState, useEffect } from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard.js';
 
 import { useLocation } from 'react-router-dom';
 
 function MoviesCardList({
   movies,
-  addMuviesBtn,
-  // addMovies,
+  allFoundMovies,
   saveMovies,
   saveMoviesCheck,
+  addMuviesBtn,
 }) {
   const { pathname } = useLocation();
 
@@ -30,8 +29,7 @@ function MoviesCardList({
         <div className="cardlist__hint-text">Ничего не найдено</div>
       )}
 
-      {/* {addMovies.length > 0 && pathname === '/movies' ? ( */}
-      {movies.length > 0 && pathname === '/movies' ? (
+      {allFoundMovies.length > 0 && pathname === '/movies' ? (
         <button
           className="cardlist__add-muvies-btn"
           onClick={addMuviesBtn}

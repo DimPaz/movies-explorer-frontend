@@ -11,7 +11,7 @@ function Profile({ onSignOut, onUpdateUser, infoText }) {
   const [inactiveBtm, setInactiveBtm] = useState(false);
 
   useEffect(() => {
-    console.log(infoText)
+    console.log(infoText);
   }, [infoText]);
 
   useEffect(() => {
@@ -44,7 +44,6 @@ function Profile({ onSignOut, onUpdateUser, infoText }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // console.log(nameNew, emailNew);
     onUpdateUser({
       name: nameNew,
       email: emailNew,

@@ -6,11 +6,9 @@ import NavTab from '../../components/NavTab/NavTab.js';
 import Navigation from '../../components/Navigation/Navigation.js';
 
 function Header({ loggedIn }) {
-  // console.log('header => ', loggedIn);
   const { pathname } = useLocation();
   return (
     <header className={`header ${pathname === '/' ? 'header_auth' : ''}`}>
-      {/* <header className={`header ${!loggedIn ? 'header_auth' : ''}`}> */}
       <Link to="/">
         <img className="header__logo" src={logo} alt="Логотип"></img>
       </Link>

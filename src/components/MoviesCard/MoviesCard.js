@@ -12,11 +12,9 @@ function MoviesCard({ item, saveMovies, saveMoviesCheck }) {
 
   function handleSaveNotSaveBtn() {
     const newFilm = !saved;
-    // const saveNewFilm = saveMovies.find((data) => data.movieId == item.id);
     const saveNewFilm = saveMovies.filter((data) => {
       return data.movieId == item.id;
     });
-    // console.log('saveNewFilm чему равно', saveNewFilm);
     saveMoviesCheck(
       { ...item, _id: saveNewFilm.length > 0 ? saveNewFilm[0]._id : null },
       newFilm
@@ -28,7 +26,6 @@ function MoviesCard({ item, saveMovies, saveMoviesCheck }) {
       const valueSaveNotSave = saveMovies.find(
         (data) => data.movieId == item.id
       );
-      // console.log('valueSaveNotSave =>', valueSaveNotSave);
       if (valueSaveNotSave) {
         setSaved(true);
       } else {

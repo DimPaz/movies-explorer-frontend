@@ -1,7 +1,6 @@
 import './SearchForm.css';
 
 import { useState, useEffect } from 'react';
-// import { useForm } from '../../hooks/useForm.js';
 
 function SearchForm({
   onGetMovie,
@@ -9,10 +8,8 @@ function SearchForm({
   onCheckbox,
   statusCheckbox,
 }) {
-  // const { values, handleChange } = useForm({});
   const [valueSearch, setValueSearch] = useState('');
   const [checkbox, setCheckbox] = useState(false);
-  // const [valueSearch, setValueSearch] = useState('')
 
   useEffect(() => {
     setValueSearch(statusInputSearch);

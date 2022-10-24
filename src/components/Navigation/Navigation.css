@@ -36,8 +36,6 @@
   right: 0;
   top: 0;
   bottom: 0;
-  /* min-width: calc(100vw - 18px); */
-  /* height: 100%; */
   z-index: 1;
 }
 
@@ -64,18 +62,16 @@
     background-image: url('../../images/btn-menu.svg');
     background-repeat: no-repeat;
   }
-  
+
   .navigation__toggle:checked ~ .navigation__container {
     right: 0;
     top: 0;
     position: fixed;
-    /* position: absolute; */
     visibility: visible;
   }
   .navigation__container {
     position: fixed;
     visibility: hidden;
-    /* top: 0; */
     right: 0;
     width: 520px;
     height: 100vh;
@@ -84,7 +80,6 @@
     justify-content: space-between;
     background-color: #ffffff;
     top: -100%;
-    /* right: -100%; */
     transition-timing-function: cubic-bezier(0.22, 0.81, 0.01, 0.99);
     transition-duration: 0.7s;
     z-index: 2;

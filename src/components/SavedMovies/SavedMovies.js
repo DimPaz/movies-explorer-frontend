@@ -51,6 +51,8 @@ function SavedMovies() {
     if (localStorageHintSaveMovies) {
       setHintText(localStorageHintSaveMovies);
     }
+
+    // отключаем прелаудер
     setTimeout(() => {
       setPreloader(false);
     }, 300);
@@ -69,26 +71,26 @@ function SavedMovies() {
     }
   }
 
+  // находим короткометражки
   useEffect(() => {
     if (statusCheckbox) {
       const shortСards = saveMovies.filter(({ duration }) => duration < 41);
-      const shortFoundСards = shortСards.filter(
-        ({ nameRU, nameEN, year }) =>
-          nameRU.toLowerCase().includes(statusInputSearch.toLowerCase()) ||
-          nameEN.toLowerCase().includes(statusInputSearch.toLowerCase()) ||
-          year.includes(statusInputSearch)
-      );
-      setShowMovie(shortFoundСards);
+      filterMovies(shortСards);
     } else {
-      const foundСards = saveMovies.filter(
-        ({ nameRU, nameEN, year }) =>
-          nameRU.toLowerCase().includes(statusInputSearch.toLowerCase()) ||
-          nameEN.toLowerCase().includes(statusInputSearch.toLowerCase()) ||
-          year.includes(statusInputSearch)
-      );
-      setShowMovie(foundСards);
+      filterMovies(saveMovies);
     }
   }, [saveMovies, statusCheckbox, statusInputSearch]);
+
+  //фильтр фильмов
+  function filterMovies(cards) {
+    const foundСards = cards.filter(
+      ({ nameRU, nameEN, year }) =>
+        nameRU.toLowerCase().includes(statusInputSearch.toLowerCase()) ||
+        nameEN.toLowerCase().includes(statusInputSearch.toLowerCase()) ||
+        year.includes(statusInputSearch)
+    );
+    setShowMovie(foundСards);
+  }
 
   //SearchInput
   function handleGetMovie(valueSearch) {
@@ -125,7 +127,11 @@ function SavedMovies() {
       {!hintText && preloader && <Preloader />}
       {hintText && <div className="movies__hint-text">{hintText}</div>}
       {!preloader && !hintText && showMovie !== null && saveMovies !== null && (
-        <MoviesCardList movies={showMovie} saveMoviesCheck={saveMoviesCheck} />
+        <MoviesCardList
+          movies={showMovie}
+          saveMoviesCheck={saveMoviesCheck}
+          allFoundMovies={0}
+        />
       )}
     </section>
   );

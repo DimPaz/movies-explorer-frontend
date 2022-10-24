@@ -105,6 +105,7 @@ function App() {
         });
     }
   }
+
   //редактирование name и email
   function handleUpdateUser({ name, email }) {
     mainApi
