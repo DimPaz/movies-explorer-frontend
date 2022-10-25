@@ -42,7 +42,7 @@ function App() {
       .register(name, email, password)
       .then((user) => {
         if (user) {
-          console.log('успешная регистрация', user);
+          console.log('успешная регистрация');
           handleLogin({ email: user.email, password });
         }
       })
@@ -76,7 +76,12 @@ function App() {
           }, 700);
         }
       })
-      .catch((err) => console.log('Ошибка авторизации', err))
+      .catch((err) => {
+        console.log('Ошибка авторизации', err);
+        setTimeout(() => {
+          setInfoTextErrorReg(true);
+        }, 700);
+      })
       .finally(
         setTimeout(() => {
           setInfoTextErrorReg(false);
