@@ -6,13 +6,9 @@ function Profile({ onSignOut, onUpdateUser, infoText }) {
   const currentUser = useContext(CurrentUserContext);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [nameNew, setNameNew] = useState('');
-  const [emailNew, setEmailNew] = useState('');
+  const [nameNew, setNameNew] = useState(currentUser.name);
+  const [emailNew, setEmailNew] = useState(currentUser.email);
   const [inactiveBtm, setInactiveBtm] = useState(false);
-
-  useEffect(() => {
-    console.log(infoText);
-  }, [infoText]);
 
   useEffect(() => {
     setName(currentUser.name);
@@ -65,12 +61,10 @@ function Profile({ onSignOut, onUpdateUser, infoText }) {
             <input
               className="profile-form__items_input"
               type="text"
-              placeholder={name}
               name="nameNew"
               minLength="2"
               maxLength="30"
-              // required
-              value={nameNew || ''}
+              value={nameNew}
               onChange={handleChangeName}
             />
           </div>
@@ -79,10 +73,8 @@ function Profile({ onSignOut, onUpdateUser, infoText }) {
             <input
               className="profile-form__items_input"
               type="email"
-              placeholder={email}
               name="emailNew"
-              // required
-              value={emailNew || ''}
+              value={emailNew}
               onChange={handleChangeEmail}
             />
           </div>

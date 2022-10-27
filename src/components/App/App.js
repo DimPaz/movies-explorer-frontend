@@ -5,6 +5,7 @@ import {
   Switch,
   useLocation,
   useHistory,
+  withRouter,
 } from 'react-router-dom';
 
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
@@ -153,8 +154,27 @@ function App() {
           <Route exact path="/">
             <Main />
           </Route>
-
-          <Route exact path="/signup">
+          <ProtectedRoute
+            path="/saved-movies"
+            component={SavedMovies}
+            loggedIn={loggedIn}
+          />
+          <ProtectedRoute
+            path="/movies"
+            component={Movies}
+            loggedIn={loggedIn}
+          />
+          <ProtectedRoute
+            path="/profile"
+            component={Profile}
+            loggedIn={loggedIn}
+            onSignOut={handleSignOut}
+            onUpdateUser={handleUpdateUser}
+            infoText={infoText}
+          />
+          <Route
+            path="/signup"
+          >
             {loggedIn ? (
               <Redirect to="/movies" />
             ) : (
@@ -162,7 +182,9 @@ function App() {
             )}
           </Route>
 
-          <Route exact path="/signin">
+          <Route
+            path="/signin"
+          >
             {loggedIn ? (
               <Redirect to="/movies" />
             ) : (
@@ -172,27 +194,6 @@ function App() {
               />
             )}
           </Route>
-          <ProtectedRoute
-            exact
-            path="/profile"
-            component={Profile}
-            loggedIn={loggedIn}
-            onSignOut={handleSignOut}
-            onUpdateUser={handleUpdateUser}
-            infoText={infoText}
-          />
-          <ProtectedRoute
-            exact
-            path="/saved-movies"
-            component={SavedMovies}
-            loggedIn={loggedIn}
-          />
-          <ProtectedRoute
-            exact
-            path="/movies"
-            component={Movies}
-            loggedIn={loggedIn}
-          />
           <Route path="*">
             <PageNotFound />
           </Route>
@@ -208,4 +209,4 @@ function App() {
     </CurrentUserContext.Provider>
   );
 }
-export default App;
+export default withRouter(App);

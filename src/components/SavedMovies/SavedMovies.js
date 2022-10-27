@@ -21,6 +21,7 @@ function SavedMovies() {
     mainApi
       .getMovies()
       .then((data) => {
+        setShowMovie(data);
         setSaveMovies(data);
       })
       .catch((err) => {
@@ -30,13 +31,6 @@ function SavedMovies() {
         );
       });
 
-    //возвращаем значение инпута
-    const localStorageSearchSavedMovies =
-      localStorage.getItem('searchSavedMovies');
-    if (localStorageSearchSavedMovies) {
-      setStatusInputSearch(localStorageSearchSavedMovies);
-    }
-
     //возвращаем положение чекбокса
     const localStorageCheckSavedMovies =
       localStorage.getItem('checkSavedMovies');
@@ -44,18 +38,10 @@ function SavedMovies() {
       setStatusCheckbox(localStorageCheckSavedMovies === 'true');
     }
 
-    //возвращаем подсказку
-    const localStorageHintSaveMovies = localStorage.getItem(
-      'localHintTextSaveMovies'
-    );
-    if (localStorageHintSaveMovies) {
-      setHintText(localStorageHintSaveMovies);
-    }
-
     // отключаем прелаудер
     setTimeout(() => {
       setPreloader(false);
-    }, 300);
+    }, 1000);
   }, []);
 
   //удаление карточек

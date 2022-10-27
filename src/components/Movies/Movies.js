@@ -20,19 +20,24 @@ function Movies() {
   const [hintText, setHintText] = useState('');
 
   useEffect(() => {
-    // запрос фильмов beatfilm-movies
-    moviesApi
-      .getMovies()
-      .then((data) => {
-        localStorage.setItem('allMovies', JSON.stringify(data));
-        setAllMovies(JSON.parse(localStorage.getItem('allMovies')));
-      })
-      .catch((err) => {
-        console.log(err);
-        setHintText(
-          'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз'
-        );
-      });
+    const localStorageAllMovies = localStorage.getItem('allMovies');
+    if (localStorageAllMovies) {
+      setAllMovies(JSON.parse(localStorage.getItem('allMovies')));
+    } else {
+      // запрос фильмов beatfilm-movies
+      moviesApi
+        .getMovies()
+        .then((data) => {
+          localStorage.setItem('allMovies', JSON.stringify(data));
+          setAllMovies(JSON.parse(localStorage.getItem('allMovies')));
+        })
+        .catch((err) => {
+          console.log(err);
+          setHintText(
+            'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз'
+          );
+        });
+    }
 
     // запрос фильмов которые мы сохранили
     mainApi
@@ -68,24 +73,24 @@ function Movies() {
     // отключаем прелаудер
     setTimeout(() => {
       setPreloader(false);
-    }, 500);
+    }, 2500);
   }, []);
 
   //добавление и удаление картчек
   async function saveMoviesCheck(movie, likeFilm) {
     if (likeFilm) {
       const newFilm = {
-        country: movie.country || 'нужно загуглить',
-        description: movie.description,
-        director: movie.director,
+        country: movie.country || 'нет информации',
+        description: movie.description || 'нет информации',
+        director: movie.director || 'нет информации',
         duration: movie.duration,
-        image: `https://api.nomoreparties.co${movie.image.url}`,
         movieId: movie.id,
-        nameEN: movie.nameEN,
-        nameRU: movie.nameRU,
+        image: `https://api.nomoreparties.co${movie.image.url}`,
+        nameEN: movie.nameEN || 'нет информации',
+        nameRU: movie.nameRU || 'нет информации',
         thumbnail: `https://api.nomoreparties.co${movie.image.url}`,
-        trailerLink: movie.trailerLink,
-        year: movie.year,
+        trailerLink: movie.trailerLink || 'нет информации',
+        year: movie.year || 'нет информации',
       };
       try {
         await mainApi.addMovies(newFilm);
