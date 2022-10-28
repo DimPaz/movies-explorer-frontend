@@ -98,15 +98,15 @@ function App() {
         .getContent(token)
         .then((res) => {
           if (res) {
+            history.push(pathname);
             setLoggedIn(true);
             setCurrentUser(res);
           } else {
-            setLoggedIn(false);
+            handleSignOut();
           }
         })
         .catch((err) => {
-          setLoggedIn(false);
-          localStorage.removeItem('token');
+          handleSignOut();
           console.log('Ошибка токена ', err);
         });
     }
@@ -124,6 +124,9 @@ function App() {
         }, 2000);
       })
       .catch((err) => {
+        if (err === '401') {
+          handleSignOut();
+        }
         setInfoText('Данные не сохранены');
         setTimeout(() => {
           setInfoText('');
@@ -135,6 +138,13 @@ function App() {
   // выход из системы
   function handleSignOut() {
     localStorage.removeItem('token');
+    localStorage.removeItem('allMovies');
+    localStorage.removeItem('search');
+    localStorage.removeItem('localCheck');
+    localStorage.removeItem('localHintText');
+    localStorage.removeItem('searchSavedMovies');
+    localStorage.removeItem('localHintTextSaveMovies');
+    localStorage.removeItem('checkSavedMovies');
     history.push('/');
     setLoggedIn(false);
   }
@@ -158,11 +168,13 @@ function App() {
             path="/saved-movies"
             component={SavedMovies}
             loggedIn={loggedIn}
+            onSignOut={handleSignOut}
           />
           <ProtectedRoute
             path="/movies"
             component={Movies}
             loggedIn={loggedIn}
+            onSignOut={handleSignOut}
           />
           <ProtectedRoute
             path="/profile"
@@ -172,19 +184,14 @@ function App() {
             onUpdateUser={handleUpdateUser}
             infoText={infoText}
           />
-          <Route
-            path="/signup"
-          >
+          <Route path="/signup">
             {loggedIn ? (
               <Redirect to="/movies" />
             ) : (
               <Register onReg={handleReg} infoTextErrorReg={infoTextErrorReg} />
             )}
           </Route>
-
-          <Route
-            path="/signin"
-          >
+          <Route path="/signin">
             {loggedIn ? (
               <Redirect to="/movies" />
             ) : (

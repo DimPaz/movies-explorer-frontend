@@ -9,7 +9,13 @@ class MoviesApi {
     if (res.ok) {
       return res.json();
     }
-    return Promise.reject('Возникла ошибка');
+    return Promise.reject(
+      `${
+        res.status === 401
+          ? `${res.status}`
+          : `Возникла ошибка ${res.status} ${res.statusText}`
+      }`
+    );
   }
 
   _addHeader() {
@@ -24,9 +30,7 @@ class MoviesApi {
   getMovies() {
     return fetch(`${this._url}`, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: this._addHeader(),
     }).then(this._checkResponse);
   }
 }

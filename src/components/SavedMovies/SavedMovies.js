@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 import mainApi from '../../utils/MainApi.js';
 import Preloader from '../Preloader/Preloader.js';
 
-function SavedMovies() {
+function SavedMovies({ onSignOut }) {
   const [showMovie, setShowMovie] = useState([]);
   const [saveMovies, setSaveMovies] = useState([]);
   const [statusInputSearch, setStatusInputSearch] = useState('');
@@ -25,6 +25,9 @@ function SavedMovies() {
         setSaveMovies(data);
       })
       .catch((err) => {
+        if (err === '401') {
+          onSignOut();
+        }
         console.log(err);
         setHintText(
           'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз'
@@ -42,18 +45,23 @@ function SavedMovies() {
     setTimeout(() => {
       setPreloader(false);
     }, 1000);
-  }, []);
+  }, [onSignOut]);
 
   //удаление карточек
-  async function saveMoviesCheck(movie, likeFilm) {
+  function saveMoviesCheck(movie, likeFilm) {
     if (!likeFilm) {
-      try {
-        await mainApi.delMovie(movie._id);
-        const delFilm = await mainApi.getMovies();
-        setSaveMovies(delFilm);
-      } catch (err) {
-        console.log(err);
-      }
+      mainApi
+        .delMovie(movie._id)
+        .then(({ data }) => {
+          const delFilm = saveMovies.filter((n) => n._id !== data._id);
+          setSaveMovies(delFilm);
+        })
+        .catch((err) => {
+          if (err === '401') {
+            onSignOut();
+          }
+          console.log(err);
+        });
     }
   }
 

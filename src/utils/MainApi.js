@@ -9,7 +9,13 @@ class MainApi {
     if (res.ok) {
       return res.json();
     }
-    return Promise.reject('Возникла ошибка');
+    return Promise.reject(
+      `${
+        res.status === 401
+          ? `${res.status}`
+          : `Возникла ошибка ${res.status} ${res.statusText}`
+      }`
+    );
   }
 
   // запрос на регистрацию

@@ -8,7 +8,7 @@ import mainApi from '../../utils/MainApi';
 import moviesApi from '../../utils/MoviesApi';
 import Preloader from '../Preloader/Preloader';
 
-function Movies() {
+function Movies({ onSignOut }) {
   const [allMovies, setAllMovies] = useState([]);
   const [showMovie, setShowMovie] = useState([]);
   const [allFoundMovies, setAllFoundMovies] = useState([]);
@@ -32,6 +32,9 @@ function Movies() {
           setAllMovies(JSON.parse(localStorage.getItem('allMovies')));
         })
         .catch((err) => {
+          if (err === '401') {
+            onSignOut();
+          }
           console.log(err);
           setHintText(
             'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз'
@@ -46,6 +49,9 @@ function Movies() {
         setSaveMovies(data);
       })
       .catch((err) => {
+        if (err === '401') {
+          onSignOut();
+        }
         console.log(err);
         setHintText(
           'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз'
@@ -92,21 +98,30 @@ function Movies() {
         trailerLink: movie.trailerLink || 'нет информации',
         year: movie.year || 'нет информации',
       };
-      try {
-        await mainApi.addMovies(newFilm);
-        const addFilm = await mainApi.getMovies();
-        setSaveMovies(addFilm);
-      } catch (err) {
-        console.log(err);
-      }
+      mainApi
+        .addMovies(newFilm)
+        .then((data) => {
+          setSaveMovies([data, ...saveMovies]);
+        })
+        .catch((err) => {
+          if (err === '401') {
+            onSignOut();
+          }
+          console.log(err);
+        });
     } else {
-      try {
-        await mainApi.delMovie(movie._id);
-        const delFilm = await mainApi.getMovies();
-        setSaveMovies(delFilm);
-      } catch (err) {
-        console.log(err);
-      }
+      mainApi
+        .delMovie(movie._id)
+        .then(({ data }) => {
+          const delFilm = saveMovies.filter((n) => n._id !== data._id);
+          setSaveMovies(delFilm);
+        })
+        .catch((err) => {
+          if (err === '401') {
+            onSignOut();
+          }
+          console.log(err);
+        });
     }
   }
 
