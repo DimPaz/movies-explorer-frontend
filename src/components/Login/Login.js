@@ -77,9 +77,9 @@ function Login({ onLogin, infoTextErrorReg }) {
           </button>
           <p className="form__text">
             Ещё не зарегистрированы?
-            <a className="form__link" href="/signup">
+            <Link className="form__link" to="/signup">
               Регистрация
-            </a>
+            </Link>
           </p>
         </form>
       </div>

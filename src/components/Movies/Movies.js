@@ -170,7 +170,7 @@ function Movies({ onSignOut }) {
 
   // расчет количества карточек относительно ширины
   function getCalcCards() {
-    const displayedFromWidth = {
+    const DisplayedFromWidth = {
       1279: [12, 4],
       989: [9, 3],
       750: [8, 2],
@@ -178,9 +178,9 @@ function Movies({ onSignOut }) {
     };
     const clientWidth = document.documentElement.clientWidth;
     let numberCards;
-    Object.keys(displayedFromWidth).forEach((item) => {
+    Object.keys(DisplayedFromWidth).forEach((item) => {
       if (clientWidth > +item) {
-        numberCards = displayedFromWidth[item];
+        numberCards = DisplayedFromWidth[item];
       }
     });
     return numberCards;

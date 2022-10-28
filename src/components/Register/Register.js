@@ -96,9 +96,9 @@ function Register({ onReg, infoTextErrorReg }) {
           </button>
           <p className="form__text">
             Уже зарегистрированы?
-            <a className="form__link" href="/signin">
+            <Link className="form__link" to="/signin">
               Войти
-            </a>
+            </Link>
           </p>
         </form>
       </div>
