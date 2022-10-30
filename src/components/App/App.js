@@ -21,6 +21,7 @@ import Login from '../Login/Login.js';
 import PageNotFound from '../PageNotFound/PageNotFound.js';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute.js';
 import mainApi from '../../utils/MainApi.js';
+import InfoTooltip from '../../components/InfoTooltip/InfoTooltip.js';
 
 import './App.css';
 
@@ -32,6 +33,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [infoText, setInfoText] = useState(null);
   const [infoTextErrorReg, setInfoTextErrorReg] = useState(false);
+  const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = useState(false);
 
   useEffect(() => {
     tokenCheck();
@@ -149,6 +151,13 @@ function App() {
     setLoggedIn(false);
   }
 
+  function handleInfoTooltipClick() {
+    setIsInfoTooltipPopupOpen(true);
+  }
+  function closeAllPopups() {
+    setIsInfoTooltipPopupOpen(false);
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
@@ -175,6 +184,7 @@ function App() {
             component={Movies}
             loggedIn={loggedIn}
             onSignOut={handleSignOut}
+            onInfoTooltip={handleInfoTooltipClick}
           />
           <ProtectedRoute
             path="/profile"
@@ -213,6 +223,12 @@ function App() {
           ''
         )}
       </div>
+
+      <InfoTooltip
+        isOpen={isInfoTooltipPopupOpen}
+        onClose={closeAllPopups}
+        // notify={notify}
+      />
     </CurrentUserContext.Provider>
   );
 }

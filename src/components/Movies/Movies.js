@@ -8,7 +8,7 @@ import mainApi from '../../utils/MainApi';
 import moviesApi from '../../utils/MoviesApi';
 import Preloader from '../Preloader/Preloader';
 
-function Movies({ onSignOut }) {
+function Movies({ onSignOut, onInfoTooltip }) {
   const [allMovies, setAllMovies] = useState([]);
   const [showMovie, setShowMovie] = useState([]);
   const [allFoundMovies, setAllFoundMovies] = useState([]);
@@ -91,10 +91,12 @@ function Movies({ onSignOut }) {
         director: movie.director || 'нет информации',
         duration: movie.duration,
         movieId: movie.id,
-        image: `https://api.nomoreparties.co${movie.image.url}`,
+        image:
+          `https://api.nomoreparties.co${movie.image.url}` || 'нет информации',
         nameEN: movie.nameEN || 'нет информации',
         nameRU: movie.nameRU || 'нет информации',
-        thumbnail: `https://api.nomoreparties.co${movie.image.url}`,
+        thumbnail:
+          `https://api.nomoreparties.co${movie.image.url}` || 'нет информации',
         trailerLink: movie.trailerLink || 'нет информации',
         year: movie.year || 'нет информации',
       };
@@ -106,6 +108,9 @@ function Movies({ onSignOut }) {
         .catch((err) => {
           if (err === '401') {
             onSignOut();
+          }
+          if (err === '400') {
+            onInfoTooltip();
           }
           console.log(err);
         });

@@ -1,4 +1,5 @@
-const url = 'https://api.dpazuxin.nomoredomains.icu';
+const url = 'https://api.dpazuxin.nomoredomains.icu'; //serv
+//const url = 'http://localhost:3000'; //loc
 
 class MainApi {
   constructor(url) {
@@ -12,6 +13,8 @@ class MainApi {
     return Promise.reject(
       `${
         res.status === 401
+          ? `${res.status}`
+          : res.status === 400
           ? `${res.status}`
           : `Возникла ошибка ${res.status} ${res.statusText}`
       }`
