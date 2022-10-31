@@ -223,12 +223,7 @@ function App() {
           ''
         )}
       </div>
-
-      <InfoTooltip
-        isOpen={isInfoTooltipPopupOpen}
-        onClose={closeAllPopups}
-        // notify={notify}
-      />
+      <InfoTooltip isOpen={isInfoTooltipPopupOpen} onClose={closeAllPopups} />
     </CurrentUserContext.Provider>
   );
 }

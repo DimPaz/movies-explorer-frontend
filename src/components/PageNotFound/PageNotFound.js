@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom';
 function PageNotFound() {
   const history = useHistory();
 
-  console.log('PageNotFound');
   return (
     <section className="page-not-found">
       <div>

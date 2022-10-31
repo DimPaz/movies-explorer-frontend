@@ -1,5 +1,5 @@
 const url = 'https://api.dpazuxin.nomoredomains.icu'; //serv
-//const url = 'http://localhost:3000'; //loc
+// const url = 'http://localhost:3000'; //loc
 
 class MainApi {
   constructor(url) {

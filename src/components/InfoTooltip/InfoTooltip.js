@@ -1,6 +1,6 @@
 import './InfoTooltip.css';
 
-function InfoTooltip({ isOpen, onClose, notify }) {
+function InfoTooltip({ isOpen, onClose }) {
   function closePopupOnOverlay(event) {
     if (event.target === event.currentTarget) {
       onClose();
