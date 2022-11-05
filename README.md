@@ -4,10 +4,8 @@
 
 ## Ссылки на проект
 
-IP 51.250.77.251
-
-Frontend https://dpazuxin.nomoredomains.icu
-
-Backend https://api.dpazuxin.nomoredomains.icu
-
-Макет https://disk.yandex.ru/d/9Q8Q-o4FpmG2Bw и на всякий случай https://disk.yandex.ru/d/Ahophw90cY55BA
+- IP 51.250.77.251
+- Frontend https://dpazuxin.nomoredomains.icu
+- Backend https://api.dpazuxin.nomoredomains.icu
+- Макет https://disk.yandex.ru/d/9Q8Q-o4FpmG2Bw и на всякий случай https://disk.yandex.ru/d/Ahophw90cY55BA
+- Ссылка на пул реквест https://github.com/DimPaz/movies-explorer-frontend/pull/2#issue-1423057585

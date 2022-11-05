@@ -1,13 +1,14 @@
 import './Header.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import logo from '../../images/logo.svg';
 import iconMain from '../../images/icon-main.svg';
 import NavTab from '../../components/NavTab/NavTab.js';
 import Navigation from '../../components/Navigation/Navigation.js';
 
 function Header({ loggedIn }) {
+  const { pathname } = useLocation();
   return (
-    <header className={`header ${!loggedIn ? 'header_auth' : ''}`}>
+    <header className={`header ${pathname === '/' ? 'header_auth' : ''}`}>
       <Link to="/">
         <img className="header__logo" src={logo} alt="Логотип"></img>
       </Link>

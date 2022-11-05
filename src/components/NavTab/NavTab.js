@@ -1,14 +1,15 @@
 import './NavTab.css';
+import { Link } from 'react-router-dom';
 
 function NavTab() {
   return (
     <div className="nav-tab">
-      <a className="nav-tab__reg" href="/signup">
+      <Link className="nav-tab__reg" to="/signup">
         Регистрация
-      </a>
-      <a className="nav-tab__enter" href="/signin">
+      </Link>
+      <Link className="nav-tab__enter" to="/signin">
         Войти
-      </a>
+      </Link>
     </div>
   );
 }

@@ -8,7 +8,7 @@
   transition: filter 0.1s linear, opacity 0.1s linear;
 }
 .element__image:hover {
-  filter: drop-shadow(0px 4px 2px rgba(95, 95, 95, 0.6));
+  filter: drop-shadow(0px 5px 3px rgba(0, 0, 0, 0.8));
   opacity: 0.9;
 }
 .element__data {
@@ -61,7 +61,7 @@
   margin: 0;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 750px) {
   .element {
     width: 339px;
   }
